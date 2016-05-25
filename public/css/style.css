@@ -159,12 +159,17 @@ nav {
     z-index: 50;
     box-shadow: 0px -3px 5px #000000;
 }
+input, textarea, select {
+    font-family: "Rough Typewriter";
+}
 .post-form input[type="text"] {
     width: 200px;
+    border-radius: 5px;
     line-height: 2em;
-    /*background: ;*/
+    border: 0;
+    padding: 3px;
+    font-family: "Rough Typewriter";
     padding-left: 5px;
-    color: #FFF;
 }
 .post-form input[type="submit"] {
     border: 0;
@@ -187,17 +192,26 @@ nav {
 }
 .form-row img {
     position: absolute;
-    left: 0px;
+    left: 80px;
+    border-radius: 50%;
 }
 .form-row input {
     position: absolute;
     width: 50%;
     right: 0px;
+    border: 0;
+    border-radius: 5px;
+}
+.form-row input[type="submit"] {
+    background: #329932;
 }
 .warning {
-    color: red;
+    color: #cc0000;
     text-align: center;
     /*text-shadow: 2px 2px 5px #000000;*/
+}
+#delete_button {
+    background-color: #cc0000;
 }
 .post-user-pic {
     width: 50px;
@@ -205,19 +219,48 @@ nav {
     border-radius: 50%;
 }
 .send-msg {
-    width: 50%;
+    width: 60%;
     position: absolute;
-    left: 25%;
+    left: 20%;
     margin: auto;
 }
 #msg-select {
     position: static;
+    border-radius: 5px;
+    line-height: 2em;
+    border: 0;
+    padding: 3px;
+    font-family: "Rough Typewriter";
 }
 #msg-txt {
     position: static;
-    width: auto;
+    width: 200px;
+    border-radius: 5px;
+    line-height: 1.5em;
+    border: 0;
+    padding: 3px;
+    font-family: "Rough Typewriter";
 }
 #msg-go {
     position: static;
-    width: 100px;
+    border: 0;
+    background: #329932;
+    border-radius: 5px;
+    line-height: 1.5em;
+    width:100px;
+    font-family: "Rough Typewriter";
+}
+
+.message {
+    width: 450px;
+    text-align: left;
+    margin: auto;
+}
+
+.message p {
+    font-family: "Rough Typewriter";
+}
+.message b {
+    font-family: "Through The Night";
+    color: #cc0000;
 }

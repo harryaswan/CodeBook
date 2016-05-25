@@ -1,0 +1,54 @@
+<h1>Trending</h1>
+</br>
+<table>
+    <tr>
+        <th>
+            Thing
+        </th>
+        <th>
+            Result
+        </th>
+    </tr>
+    <tr>
+        <td>
+            User with most post:
+        </td>
+        <td>
+            <%= Trending.user_with_most_posts.name %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            User with most comments:
+        </td>
+        <td>
+            <%= Trending.user_with_most_comments.name %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Post with most comments:
+        </td>
+        <td>
+            <%= Trending.post_with_most_comments.id %>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Top 5 words in posts:
+        </td>
+        <td>
+            <%= Trending.most_popular_words_in_posts %>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            Top 5 words in comments:
+        </td>
+        <td>
+            <%= Trending.most_popular_words_in_comments %>
+        </td>
+    </tr>
+
+</table>

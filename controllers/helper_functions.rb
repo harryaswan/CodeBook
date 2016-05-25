@@ -118,10 +118,10 @@ helpers do
         if conversations.length > 0
             conversations.each do |convo|
                 last_message = convo.last_message
-                other_user = convo.a_id == cur_user ? friends.find_by_id(convo.b_id) : friends.find_by_id(convo.a_id)
+                other_user = convo.a_id == cur_user ? User.get(convo.b_id) : User.get(convo.a_id)
                 return_text << "<div class='convo-li'>"
                 return_text << "    <div class='convo-row'>"
-                return_text << "        <a href='/messages/#{convo.a_id == cur_user ? friends.find_by_id(convo.b_id).name : friends.find_by_id(convo.a_id).name}'>"
+                return_text << "        <a href='/messages/#{convo.a_id == cur_user ? User.get(convo.b_id).name : User.get(convo.a_id).name}'>"
                 return_text << "            <p>#{other_user.full_name}</p>"
                 return_text << "            <p class='message-head'>#{cur_user == last_message.s_id ? "You:": "#{other_user.f_name}:"} #{last_message.preview}</p>"
                 return_text << "        </a>"

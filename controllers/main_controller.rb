@@ -12,7 +12,7 @@ post '/signup/?' do
         session[:user] = @user
         redirect '/'
     else
-        redirect '/signup'
+        redirect '/signup?error=true'
     end
 end
 

@@ -139,9 +139,9 @@ class User
 
     def conversations()
         # sql = "SELECT * FROM (SELECT c.* FROM conversations c JOIN messages m ON c_id WHERE (c.a_id=#{@id} OR c.b_id=#{@id}) ORDER BY m.sent DESC) AS stuff GROUP BY id;"
-        sql = "SELECT c.* FROM conversations c JOIN messages m ON c.id = m.c_id WHERE (c.a_id=#{@id} OR c.b_id=#{@id}) GROUP BY c.id ORDER BY m.sent;"
-        # sql = "SELECT * FROM conversations WHERE (a_id=#{@id} OR b_id=#{@id});"
-
+        # sql = "SELECT c.* FROM conversations c JOIN messages m ON c.id = m.c_id WHERE (c.a_id=#{@id} OR c.b_id=#{@id}) GROUP BY c.id ORDER BY m.sent;"
+        # sql = "SELECT * FROM conversations WHERE (a_id=#{@id} OR b_id=#{@id}) ORDER BY id DESC;"
+        sql = "select * from (select distinct on(c.id) c.*, sent from conversations c left join messages m on (c.id = m.c_id) order by c.id,m.sent desc) as b WHERE (b.a_id=#{@id} OR b.b_id=#{@id}) order by sent desc;"
         return Conversation.create(sql)
     end
 
@@ -161,10 +161,14 @@ class User
 
     def self.signup(options)
         # puts options
-        enc_pass = Encrypt.value(options[:password])
-        sql = "INSERT INTO users (username, password, f_name, l_name) VALUES ('#{options[:username].downcase}', '#{enc_pass}', '#{options[:f_name].capitalize}', '#{options[:l_name].capitalize}');"
-        SQLRun.exec(sql)
-        return User.login(options)
+        if !(options[:password] == options[:password_repeated] || options[:username].empty?)
+            enc_pass = Encrypt.value(options[:password])
+            sql = "INSERT INTO users (username, password, f_name, l_name) VALUES ('#{options[:username].downcase}', '#{enc_pass}', '#{options[:f_name].capitalize}', '#{options[:l_name].capitalize}');"
+            SQLRun.exec(sql)
+            return User.login(options)
+        else
+            return nil
+        end
     end
 
 
