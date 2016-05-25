@@ -1,0 +1,28 @@
+<h1>Friends</h1>
+
+
+
+<div class="friends-container">
+    <p>Current friends</p>
+    <% if @friends.length > 0 %>
+        <% for friend in @user.friends %>
+            <%= display_friend(friend, @user.friends?(friend.id), @user.requested_friendship?(friend.id)) %>
+        <% end %>
+    <% else %>
+        <p>No friends have been added yet. Add some below.</p>
+    <% end %>
+</div>
+
+
+<div class="friends-container">
+    <p>Add friends</p>
+    <% if @users.length > 1 %>
+        <% for user in @users %>
+            <% if !@friends.include?(user) && user.id != @user.id %>
+                <%= display_friend(user, true) %>
+            <% end %>
+        <% end %>
+    <% else %>
+        <p>There are no more users for you to add as friends.</p>
+    <% end %>
+</div>

@@ -1,0 +1,14 @@
+<h1>Messages with <%= @other_user.full_name %></h1>
+<p>Convo #<%= @convo.id %></p>
+<p>Last Message: <%= @convo.last_message.preview %></p>
+
+<div class="messages">
+    <%= display_messages(@convo.messages, @user, @other_user) %>
+</div>
+
+<form action="/messages/<%= @other_user.name %>/new" method="post">
+    <div class="form-row">
+        <textarea name="new_message" rows="1" cols="30"></textarea>
+        <input type="submit" value="Send Message" />
+    </div>
+</form>

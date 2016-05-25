@@ -1,0 +1,71 @@
+<h1>Edit your account</h1>
+
+<form action="/users/edit" method="post" enctype="multipart/form-data">
+    <div class="form-row">
+        <p>Update any of your details:</p>
+    </div>
+    <div class="form-row">
+        <label for="f_name">First Name:</label>
+        <input type="text" name="f_name" placeholder="e.g. John" value="<%= @user.f_name %>"/>
+    </div>
+    <div class="form-row">
+        <label for="l_name">Last Name:</label>
+        <input type="text" name="l_name" placeholder="e.g. Smith" value="<%= @user.l_name %>" />
+    </div>
+    <div class="form-row">
+        <label for="tagline">Tagline:</label>
+        <input type="text" name="tagline" placeholder="e.g. I am Batman!" value="<%= @user.tagline %>" />
+    </div>
+    <div class="form-row">
+        <label>Profile</br>Image:</label>
+        <img src="/imgs/users/<%= @user.img %>" height="50px" width="50px" />
+        <input type="file" name="profile_image" />
+    </div>
+    <div class="form-row">
+        <input type="submit" value="Save Changes" />
+        <% if @details == 'true' %>
+            <p>Changes saved!</p>
+        <% elsif @details == 'false' %>
+            <p>There was an issue with the details you entered. No changes have been made.</p>
+        <% end %>
+    </div>
+</form>
+
+<form action="/users/edit" method="post">
+    <div class="form-row">
+        <p>Change your password:</p>
+    </div>
+    <div class="form-row">
+        <label for="old_password">Old Password:</label>
+        <input type="password" name="old_password" placeholder="password" />
+    </div>
+    <div class="form-row">
+        <label for="new_password">New Password:</label>
+        <input type="password" name="new_password" placeholder="password" />
+    </div>
+    <div class="form-row">
+        <label for="new_password_confirm">Confirm Password:</label>
+        <input type="password" name="new_password_confirm" placeholder="password" />
+    </div>
+    <div class="form-row">
+        <input type="submit" value="Change password" />
+        <% if @pass == 'true' %>
+            <p>Changes saved!</p>
+        <% elsif @pass == 'false' %>
+            <p>There was an issue with the passwords you entered. No changes have been made.</p>
+        <% end %>
+    </div>
+</form>
+
+</br></br>
+
+<form action="/users/delete" method="post">
+    <input type="hidden" name="_method" value="delete" />
+    <div class="form-row">
+        <label for="delete_user">Delete your account:</label>
+        <input type="submit" name="delete_user" value="DELETE ACCOUNT" />
+    </div>
+    <div class="form-row">
+        <p class="warning">WANRING: THERE IS NO BACK UP, ONCE IT'S GONE IT'S GONE!</p>
+    </div>
+</form>

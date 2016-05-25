@@ -1,0 +1,15 @@
+<h1>Login</h1>
+
+<form action='login<%= "?redirect=#{@redirect}" if @redirect %>' method="post">
+    <div class="form-row">
+        <label for="username">Username:</label>
+        <input type="text" name="username" <%= "value='#{@username}'" if @username %>/>
+    </div>
+    <div class="form-row">
+        <label for="password">Password:</label>
+        <input type="password" name="password" />
+    </div>
+    <div class="form-row">
+        <input type="submit" value="Login" />
+    </div>
+</form>

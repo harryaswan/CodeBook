@@ -1,0 +1,8 @@
+<h1>Editing comment #<%= @comment.id %> for Post #<%= @comment.p_id %></h1>
+
+<form action="/post/<%= @comment.p_id %>/comment/<%= @comment.id %>" method="post">
+    <div class="form-row">
+        <textarea name="c_text" rows="1" cols="30"><%= @comment.text %></textarea>
+        <input type="submit" name="save_comment" value="Save Changes" />
+    </div>
+</form>

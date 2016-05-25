@@ -1,0 +1,8 @@
+<h1>Editing post #<%= @post.id %></h1>
+
+<form action="/post/<%= @post.id %>" method="post">
+    <div class="form-row">
+        <textarea name="p_text" rows="1" cols="30"><%= @post.text %></textarea>
+        <input type="submit" name="save_post" value="Save Changes" />
+    </div>
+</form>

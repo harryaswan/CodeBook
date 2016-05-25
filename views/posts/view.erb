@@ -1,0 +1,20 @@
+<h1>View post</h1>
+
+<p><%= @post.text %></p>
+<p>By: <%= @post.u_name %></p>
+</br>
+<% if @post.u_id.to_i() == @user.id.to_i() %>
+    <a href="/post/<%= @post.id %>/edit">Edit Post</a>
+    <a href="/post/<%= @post.id %>/delete">Delete Post</a>
+<% end %>
+</br>
+<a href='/post/<%= @post.id %>/yay'>Yay ( <%= @post.yays %> )</a> | <a href='/post/<%= @post.id %>/nay'>Nay ( <%= @post.nays %> )</a>
+</br></br>
+<%= display_comments(@comments, @user.id) %>
+</br></br>
+<form action="/post/<%= @post.id %>/comment/add" method="post">
+    <div class="form-row">
+        <textarea name="c_text" rows="1" cols="30"></textarea>
+        <input type="submit" name="save_comment" value="Comment" />
+    </div>
+</form>
