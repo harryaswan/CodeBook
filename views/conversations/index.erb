@@ -4,19 +4,23 @@
 
 </br></br>
 <% if @friends.length > 0 %>
-    <form action='/conversation/new' method="post">
-        <div class="form-row send-msg">
-            <select id="msg-select" name="u_id">
-                <% @friends.each do |friend| %>
-                    <% if @user.friends?(friend.id)%>
-                        <option value="<%= friend.id %>"><%= friend.full_name %></option>
+    <% if @user.friends?(@friends[0].id) %>
+        <form action='/conversation/new' method="post">
+            <div class="form-row send-msg">
+                <select id="msg-select" name="u_id">
+                    <% @friends.each do |friend| %>
+                        <% if @user.friends?(friend.id)%>
+                            <option value="<%= friend.id %>"><%= friend.full_name %></option>
+                        <% end %>
                     <% end %>
-                <% end %>
-            </select>
-            <input id="msg-txt" type="text" name="new_message" placeholder="e.g. Hey Bob, how you doing?" />
-            <input id="msg-go" type="submit" value="Send Message" />
-        </div>
-    </form>
+                </select>
+                <input id="msg-txt" type="text" name="new_message" placeholder="e.g. Hey Bob, how you doing?" />
+                <input id="msg-go" type="submit" value="Send Message" />
+            </div>
+        </form>
+    <% else %>
+        <p>You must be friends with someone to start a conversation with them...</p>
+    <% end %>
 <% else %>
     <p>You must be friends with someone to start a conversation with them...</p>
 <% end %>

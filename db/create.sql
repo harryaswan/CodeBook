@@ -1,11 +1,15 @@
-DROP TABLE messages;
-DROP TABLE conversations;
-DROP TABLE friends;
-DROP TABLE post_nays;
-DROP TABLE post_yays;
-DROP TABLE comments;
-DROP TABLE posts;
-DROP TABLE users;
+DROP FUNCTION create_convo(integer, integer) CASCADE;
+DROP FUNCTION add_friend(integer, integer) CASCADE;
+DROP FUNCTION yay(integer, integer) CASCADE;
+DROP FUNCTION nay(integer, integer) CASCADE;
+DROP TABLE messages CASCADE;
+DROP TABLE conversations CASCADE;
+DROP TABLE friends CASCADE;
+DROP TABLE post_nays CASCADE;
+DROP TABLE post_yays CASCADE;
+DROP TABLE comments CASCADE;
+DROP TABLE posts CASCADE;
+DROP TABLE users CASCADE;
 
 
 CREATE TABLE users (

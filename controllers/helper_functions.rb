@@ -7,14 +7,14 @@ helpers do
     def display_friend(friend, confirmed=false, requested=false)
 
         if confirmed
-            result = "<div class=\"friend\"><a href='/users/#{friend.id}'>#{friend.full_name}</a></div>"
+            result = "<div class=\"friend\"><a href='/users/#{friend.name}'>#{friend.full_name}</a></div>"
         else
             if requested
                 #delete?
-                result = "<div class=\"friend\"><a href='/users/#{friend.id}'>#{friend.full_name}</a> - Requested:<form action='/friends/#{friend.id}/confirm' method='post'><input type='submit' name='delete_button' value='Delete request' /></form></div>"
+                result = "<div class=\"friend\"><a href='/users/#{friend.name}'>#{friend.full_name}</a> - Requested:<form action='/friends/#{friend.id}/confirm' method='post'><input type='submit' name='delete_button' value='Delete request' /></form></div>"
             else
                 #confirm?
-                result = "<div class=\"friend\"><a href='/users/#{friend.id}'>#{friend.full_name}</a><form action='/friends/#{friend.id}/confirm' method='post'><input type='submit' name='delete_button' value='Delete request' /><input type='submit' name='confirm_button' value='Confirm friend' /></form></div>"
+                result = "<div class=\"friend\"><a href='/users/#{friend.name}'>#{friend.full_name}</a><form action='/friends/#{friend.id}/confirm' method='post'><input type='submit' name='delete_button' value='Delete request' /><input type='submit' name='confirm_button' value='Confirm friend' /></form></div>"
             end
 
         end
@@ -31,7 +31,7 @@ helpers do
                     <p class='username'>#{user.name}</p>
                 </div>
                 <div class='post-row post-text'>
-                    <a href='/post/#{post.id}'>#{post.text}</a>
+                    <a href='/post/#{post.id}'>#{Post.convert_emoji(post.text)}</a>
                 </div>
                 <div class='post-row'>
                     <p> <a href='/post/#{post.id}/yay'>Yay ( #{post.yays} )</a> | <a href='/post/#{post.id}/nay'>Nay ( #{post.nays} )</a> | Comments ( #{post.comments} ) </p>
@@ -49,7 +49,7 @@ helpers do
     def display_comments(comments, cur_user)
         result = comments.map do |comment|
             "<div class='comment-li'>
-                <p><b>#{comment.u_name}:</b> #{comment.text} #{'<a href=\'/post/'+ comment.p_id.to_s() +'/comment/' + comment.id.to_s() + '/edit\'>Edit</a>' if comment.u_id.to_i() == cur_user.to_i()} | #{'<a href=\'/post/'+ comment.p_id.to_s() +'/comment/' + comment.id.to_s() + '/delete\'>Delete</a>' if comment.u_id.to_i() == cur_user.to_i()}</p>
+                <p><b>#{comment.u_name}:</b> #{Post.convert_emoji(comment.text)} #{'<a href=\'/post/'+ comment.p_id.to_s() +'/comment/' + comment.id.to_s() + '/edit\'>Edit</a>' if comment.u_id.to_i() == cur_user.to_i()} | #{'<a href=\'/post/'+ comment.p_id.to_s() +'/comment/' + comment.id.to_s() + '/delete\'>Delete</a>' if comment.u_id.to_i() == cur_user.to_i()}</p>
             </div>"
         end
         if result.length == 0
@@ -83,7 +83,7 @@ helpers do
 
         return_text << "<p>Name: #{othr_user.full_name}</p>"
         return_text << "<p>Username: #{othr_user.name}</p>"
-        return_text << "<p>Tagline: #{othr_user.tagline}</p>"
+        return_text << "<p>Tagline: #{Post.convert_emoji(othr_user.tagline)}</p>"
         return_text << "</br><p>Posts:</p>"
 
         if friends
@@ -123,7 +123,7 @@ helpers do
                 return_text << "    <div class='convo-row'>"
                 return_text << "        <a href='/messages/#{convo.a_id == cur_user ? User.get(convo.b_id).name : User.get(convo.a_id).name}'>"
                 return_text << "            <p>#{other_user.full_name}</p>"
-                return_text << "            <p class='message-head'>#{cur_user == last_message.s_id ? "You:": "#{other_user.f_name}:"} #{last_message.preview}</p>"
+                return_text << "            <p class='message-head'>#{cur_user == last_message.s_id ? "You:": "#{other_user.f_name}:"} #{Post.convert_emoji(last_message.preview)} #{"( UNREAD )" if last_message.read == "f" && last_message.s_id != cur_user}</p>"
                 return_text << "        </a>"
                 return_text << "    </div>"
                 return_text << "</div>"
@@ -142,7 +142,7 @@ helpers do
             messages.each do |message|
 
                 return_text << "<div class='message'>"
-                return_text << "<p><b>#{user_hash[message.s_id]}:</b> #{message.msg(user_a.id)}</p>"
+                return_text << "<p><b>#{user_hash[message.s_id]}:</b> #{Post.convert_emoji(message.msg(user_a.id))}</p>"
                 return_text << "</div>"
 
             end

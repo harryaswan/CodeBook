@@ -41,5 +41,23 @@ class Trending
     end
 
 
+    def self.most_active_user
+        users = Hash.new(0)
+        sql = "SELECT user_id, COUNT(user_id) FROM posts GROUP BY user_id;"
+        result = SQLRun.exec(sql)
+        result.each do |r|
+            users[r['user_id']] += r['count'].to_i()
+        end
+
+        sql = "SELECT user_id, COUNT(user_id) FROM comments GROUP BY user_id;"
+        result = SQLRun.exec(sql)
+        result.each do |r|
+            users[r['user_id']] += r['count'].to_i()
+        end
+
+        user_id = users.sort_by {|a,b| b}.reverse
+        return User.get(user_id[0][0])
+    end
+
 
 end

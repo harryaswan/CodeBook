@@ -87,4 +87,29 @@ class Post
         return Post.create(sql)
     end
 
+    def self.convert_emoji(text)
+
+        replacements = [
+            [":)", "&#x1f642;"],
+            [":D", "&#x1f603;"],
+            [":(", "&#x2639;"],
+            [";)", "&#x1f609;"],
+            [":*", "&#x1f618;"],
+            [":P", "&#x1f61b;"],
+            [":')", "&#x1f602;"],
+            [":'(", "&#x1f62d;"],
+            [":geek:", "&#x1f913;"],
+            ["(:", "&#x1f643;"],
+            [":poop:", "&#x1f4a9;"],
+            [":see:", "&#x1f648;"],
+            [":hear:", "&#x1f649;"],
+            [":speak:", "&#x1f64a;"],
+            [":+1:", "&#x1f44d;"],
+            [":ok:", "&#x1f44c;"]
+        ]
+
+        return replacements.inject(text) {|str, (k,v)| str.gsub(k,v)}
+
+    end
+
 end

@@ -98,17 +98,16 @@ class User
     def change_details(options)
         sql = "UPDATE users SET"
         if options[:f_name] != @f_name
-            sql << " f_name='#{options[:f_name]}'"
+            sql << " f_name='#{options[:f_name]}',"
         end
         if options[:l_name] != @l_name
-            sql << " l_name='#{options[:l_name]}'"
+            sql << " l_name='#{options[:l_name]}',"
         end
         if options[:tagline] != @tagline
-            sql << " tagline='#{options[:tagline]}'"
+            sql << " tagline='#{options[:tagline]}',"
         end
         if options[:profile_image]
-
-            # generate random image name
+            generate random image name
             o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
             random_file_name = (0...10).map { o[rand(o.length)] }.join
 
@@ -119,8 +118,10 @@ class User
             File.open('public/imgs/users/' + random_file_name + file_ext, "w") do |f|
                 f.write(options[:profile_image][:tempfile].read)
             end
-            sql << " img_url='#{random_file_name + file_ext}'"
+            sql << " img_url='#{random_file_name + file_ext}',"
         end
+
+        sql = sql[0...-1]
 
         sql << " WHERE id = #{@id} RETURNING *;"
         # binding.pry

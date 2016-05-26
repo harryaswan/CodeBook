@@ -1,6 +1,6 @@
 <h1>View post</h1>
 
-<p><%= @post.text %></p>
+<p class="post-text"><%= Post.convert_emoji(@post.text) %></p>
 <p>By: <%= @post.u_name %></p>
 </br>
 <% if @post.u_id.to_i() == @user.id.to_i() %>
@@ -15,6 +15,6 @@
 <form action="/post/<%= @post.id %>/comment/add" method="post">
     <div class="form-row">
         <textarea name="c_text" rows="1" cols="30"></textarea>
-        <input type="submit" name="save_comment" value="Comment" />
+        <input class="comment-button" type="submit" name="save_comment" value="Comment" />
     </div>
 </form>

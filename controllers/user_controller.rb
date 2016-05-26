@@ -3,7 +3,11 @@ get '/users/:id_name/?' do
     if @user = session[:user]
         # TODO: something about users looking at their own profiles
         @viewing = User.get(params[:id_name])
-        erb(:'users/view')
+        if @viewing.id != @user.id
+            erb(:'users/view')
+        else
+            redirect '/friends'
+        end
     else
         redirect '/login?redirect=users/' + params[:id_name]
     end
