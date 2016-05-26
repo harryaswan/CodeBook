@@ -52,3 +52,11 @@ get '/account/?' do
         redirect '/login?redirect=account'
     end
 end
+
+get '/search/?' do
+    if !params[:q].nil?
+        @users = User.search(params[:q])
+        @posts = Post.search(params[:q])
+    end
+    erb(:'feed/search')
+end

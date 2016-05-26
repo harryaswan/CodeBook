@@ -10,10 +10,9 @@ class User
         @f_name = options['f_name']
         @l_name = options['l_name']
         @img = options['img_url']
-        if @img.nil?
-            @img = 'default.png'
-        end
         @tagline = options['tagline']
+        @img = 'default.png' if @img.nil? || @img == ""
+        @tagline = "Not yet set" if @tagline.nil? || @tagline == ""
     end
 
     def full_name()
@@ -205,6 +204,19 @@ class User
             sql = "SELECT * FROM users WHERE username = '#{id_name}';"
         end
         return User.create(sql, false)
+    end
+
+    def self.search(search_qry)
+        # binding.pry
+        search_qry.downcase!
+        if !search_qry.index(" ").nil?
+            split_qry = search_qry.split(" ")
+            sql = "SELECT * FROM users WHERE LOWER(f_name) LIKE $$%#{split_qry[0]}%$$ OR LOWER(f_name) LIKE $$%#{split_qry[1]}%$$ OR LOWER(l_name) LIKE $$%#{split_qry[0]}%$$ OR LOWER(l_name) LIKE $$%#{split_qry[1]}%$$;"
+            return User.create(sql)
+        else
+            sql = "SELECT * FROM users WHERE LOWER(username) LIKE $$%#{search_qry}%$$ OR LOWER(f_name) LIKE $$%#{search_qry}%$$ OR LOWER(l_name) LIKE $$%#{search_qry}%$$;"
+            return User.create(sql)
+        end
     end
 
     def self.create(sql, multi=true)

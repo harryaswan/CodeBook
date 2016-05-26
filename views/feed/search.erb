@@ -1,0 +1,28 @@
+<form action="/search" method="get">
+    <input type="text" name="q" placeholder="Search for...." />
+    <input type="submit" value="Search" />
+</form>
+
+<% if @users || @posts %>
+    <div class="results">
+        <h3>Users:</h3>
+        <% if @users.length > 0 %>
+            <% @users.each do |user| %>
+                <a href='/users/<%= user.name %>'><%= user.full_name %></a></br>
+            <% end %>
+        <% else %>
+            <p>No users match your search query</p>
+        <% end %>
+    </div>
+    <div class="results">
+        <h3>Posts:</h3>
+        <% binding.pry %>
+        <% if @posts.length > 0 %>
+            <% @posts.each do |post| %>
+                <a href='/post/<%= post.id %>'><%= post.text %></a></br>
+            <% end %>
+        <% else %>
+            <p>No posts match your search query</p>
+        <% end %>
+    </div>
+<% end %>

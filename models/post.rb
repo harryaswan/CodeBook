@@ -91,6 +91,12 @@ class Post
         return Post.create(sql)
     end
 
+    def self.search(search_qry)
+        search_qry.downcase!
+        sql = "SELECT * FROM posts WHERE LOWER(p_text) LIKE $$%#{search_qry}%$$;"
+        return Post.create(sql)
+    end
+
     def self.convert_emoji(text)
 
         replacements = [
