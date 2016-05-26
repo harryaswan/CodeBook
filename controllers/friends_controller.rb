@@ -1,4 +1,3 @@
-
 get '/friends/?' do
 
     if @user = session[:user]
@@ -33,7 +32,7 @@ post '/friends/:id/add/?' do
 
 end
 
-post '/friends/:id/confirm' do
+post '/friends/:id/confirm/?' do
     if @user = session[:user]
         if params[:confirm_button]
             @user.confirm_friends(params[:id].to_i(), true)

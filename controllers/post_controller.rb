@@ -1,8 +1,11 @@
-
 post '/post/new/?' do
     if @user = session[:user]
         post = Post.new({'user_id'=>@user.id, 'p_text'=>params[:post_text]}).save()
-        redirect '/post/' + post.id.to_s()
+        if post
+            redirect '/post/' + post.id.to_s()
+        else
+            redirect '/'
+        end
     else
         redirect '/'
     end
@@ -22,7 +25,7 @@ get '/post/:id/?' do
     end
 end
 
-get '/post/:id/yay' do
+get '/post/:id/yay/?' do
     if @user = session[:user]
         @post = Post.find(params[:id])
         if @user.friends().find {|f| f.id == @post.u_id } || @user.id.to_i() == @post.u_id.to_i()
@@ -37,7 +40,7 @@ get '/post/:id/yay' do
     end
 end
 
-get '/post/:id/nay' do
+get '/post/:id/nay/?' do
     if @user = session[:user]
         @post = Post.find(params[:id])
         if @user.friends().find {|f| f.id == @post.u_id } || @user.id.to_i() == @post.u_id.to_i()
@@ -61,7 +64,7 @@ post '/post/:id/?' do
     end
 end
 
-get '/post/:id/edit' do
+get '/post/:id/edit/?' do
     if @user = session[:user]
         @post = Post.find(params[:id])
         if @post.u_id.to_i() == @user.id.to_i()
@@ -72,7 +75,7 @@ get '/post/:id/edit' do
     end
 end
 
-get '/post/:id/delete' do
+get '/post/:id/delete/?' do
     if @user = session[:user]
         @post = Post.find(params[:id])
         if @post.u_id.to_i() == @user.id.to_i()

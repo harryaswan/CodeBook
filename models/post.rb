@@ -11,8 +11,12 @@ class Post
     end
 
     def save()
-        sql = "INSERT INTO posts (user_id, p_text) VALUES ('#{@u_id}', $$#{@text}$$) RETURNING *;"
-        return Post.create(sql, false)
+        if @text != "" && @text != " "
+            sql = "INSERT INTO posts (user_id, p_text) VALUES ('#{@u_id}', $$#{@text}$$) RETURNING *;"
+            return Post.create(sql, false)
+        else
+            return nil
+        end
     end
 
     def delete()

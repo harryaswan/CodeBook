@@ -12,8 +12,10 @@ class Comment
     end
 
     def save()
-        sql = "INSERT INTO comments (user_id, post_id, c_text) VALUES (#{@u_id}, #{@p_id}, $$#{@text}$$) RETURNING *;"
-        return Comment.create(sql, false)
+        if @text != "" && @text != " "
+            sql = "INSERT INTO comments (user_id, post_id, c_text) VALUES (#{@u_id}, #{@p_id}, $$#{@text}$$) RETURNING *;"
+            return Comment.create(sql, false)
+        end
     end
 
     def edit(new_text)

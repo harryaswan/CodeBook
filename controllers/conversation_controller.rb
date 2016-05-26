@@ -1,4 +1,4 @@
-get '/messages' do
+get '/messages/?' do
 
     if @user = session[:user]
         @conversations = @user.conversations()
@@ -26,7 +26,7 @@ get '/messages/:id_name/?' do
     end
 end
 
-post '/messages/:id_name/new' do
+post '/messages/:id_name/new/?' do
     if @user = session[:user]
         if @other_user = User.get(params[:id_name])
             if @convo = Conversation.check(@user.id, @other_user.id)
@@ -43,7 +43,7 @@ post '/messages/:id_name/new' do
     end
 end
 
-post '/conversation/new' do
+post '/conversation/new/?' do
 
     if @user = session[:user]
         @conversation = Conversation.new({'a_id'=>@user.id, 'b_id'=>params[:u_id]}, true).save()

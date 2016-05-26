@@ -14,7 +14,7 @@
 </br></br>
 <form action="/post/<%= @post.id %>/comment/add" method="post">
     <div class="form-row">
-        <textarea name="c_text" rows="1" cols="30"></textarea>
-        <input class="comment-button" type="submit" name="save_comment" value="Comment" />
+        <input type="text" name="c_text" id="msg-txt"></textarea>
+        <input id="comment-button" type="submit" name="save_comment" value="Comment" />
     </div>
 </form>

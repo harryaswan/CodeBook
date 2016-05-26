@@ -126,7 +126,7 @@ helpers do
                 return_text << "            <p class='message-head'>#{cur_user == last_message.s_id ? "You:": "#{other_user.f_name}:"} #{Post.convert_emoji(last_message.preview)} #{"( UNREAD )" if last_message.read == "f" && last_message.s_id != cur_user}</p>"
                 return_text << "        </a>"
                 return_text << "    </div>"
-                return_text << "</div>"
+                return_text << "</div></hr>"
             end
         else
             return_text = "<p>No conversations to display, Start one below...</p>"

@@ -2,7 +2,7 @@
 
 <form action="/post/<%= @post.id %>" method="post">
     <div class="form-row">
-        <textarea name="p_text" rows="1" cols="30"><%= @post.text %></textarea>
-        <input type="submit" name="save_post" value="Save Changes" />
+        <input type="text" name="p_text" id="msg-txt" value="<%= @post.text %>" />
+        <input type="submit" name="save_post" id="msg-go" value="Save Changes" />
     </div>
 </form>

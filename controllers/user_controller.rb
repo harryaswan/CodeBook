@@ -14,7 +14,7 @@ get '/users/:id_name/?' do
 
 end
 
-post '/users/edit' do
+post '/users/edit/?' do
     if @user = session[:user]
         if params[:old_password]
             if new_user = @user.change_password(params)
@@ -37,7 +37,7 @@ post '/users/edit' do
     end
 end
 
-delete '/users/delete' do
+delete '/users/delete/?' do
     if @user = session[:user]
         if params[:delete_user]
             @user.delete()

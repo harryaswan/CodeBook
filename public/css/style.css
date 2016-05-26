@@ -221,6 +221,10 @@ input, textarea, select {
     height: 50px;
     border-radius: 50%;
 }
+.small-pic {
+    width: 20px;
+    height: 20px;
+}
 .send-msg {
     width: 60%;
     position: absolute;
@@ -244,7 +248,7 @@ input, textarea, select {
     padding: 3px;
     font-family: "Rough Typewriter";
 }
-#msg-go {
+#msg-go, #comment-button {
     position: static;
     border: 0;
     background: #329932;
