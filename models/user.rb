@@ -106,7 +106,6 @@ class User
             sql << " tagline='#{options[:tagline]}',"
         end
         if options[:profile_image]
-            generate random image name
             o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
             random_file_name = (0...10).map { o[rand(o.length)] }.join
 
@@ -123,7 +122,6 @@ class User
         sql = sql[0...-1]
 
         sql << " WHERE id = #{@id} RETURNING *;"
-        # binding.pry
         if sql.length > (41 + "#{@id}".length)
             return User.create(sql, false)
         else
