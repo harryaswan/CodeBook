@@ -1,1 +1,1 @@
-web: ruby controller.rb -0 0.0.0.0
+web: ruby controller.rb -o 0.0.0.0
