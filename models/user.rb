@@ -71,7 +71,7 @@ class User
 
     def confirm_friends(id, confirmed)
         if confirmed
-            sql = "UPDATE friends SET confirmed=true;"
+            sql = "UPDATE friends SET confirmed=true WHERE (a_id = #{@id} OR b_id=#{@id}) AND (a_id = #{id} OR b_id = #{id});"
         else
             sql = "DELETE FROM friends WHERE (a_id = #{@id} OR b_id=#{@id}) AND (a_id = #{id} OR b_id = #{id});"
         end

@@ -27,7 +27,7 @@ post '/friends/:id/add/?' do
         @user.add_friends(params[:id].to_i())
         redirect '/users/' + params[:id]
     else
-        redirect '/login?redirect=user' + params[:id]
+        redirect '/login?redirect=friends' + params[:id]
     end
 
 end
@@ -42,6 +42,6 @@ post '/friends/:id/confirm/?' do
             redirect '/friends'
         end
     else
-        redirect '/login?redirect=user' + params[:id]
+        redirect '/login?redirect=friends' + params[:id]
     end
 end
