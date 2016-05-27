@@ -8,8 +8,6 @@ class SQLRun
             result = db.exec(sql)
         ensure
             db.close
-
-        rescue NoMethodError
         end
         return result
     end
