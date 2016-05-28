@@ -1,7 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    mail (2.6.4)
+      mime-types (>= 1.16, < 4)
+    mime-types (3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0521)
     pg (0.18.4)
+    pony (1.11)
+      mail (>= 2.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -16,6 +23,7 @@ PLATFORMS
 
 DEPENDENCIES
   pg
+  pony
   sinatra
 
 BUNDLED WITH

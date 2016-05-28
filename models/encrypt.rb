@@ -11,11 +11,4 @@ class Encrypt
         return Base64.encode64(encrypted).encode('utf-8').chomp
     end
 
-    def self.check(value_a, value_b)
-
-        # bTgTAmKKbzlx8ZNYSyA7+A==+
-        # bTgTAmKKbzlx8ZNYSyA7+A==
-
-    end
-
 end

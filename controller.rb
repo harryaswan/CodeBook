@@ -1,5 +1,6 @@
 require( 'sinatra' )
 require( 'sinatra/contrib/all' ) if development?
+require( 'pony' )
 
 require_relative('db/sql')
 
@@ -33,4 +34,11 @@ get '/' do
     else
         erb(:home)
     end
+end
+
+get '/test' do
+    Pony.mail :to => "harry@harryaswan.co.uk",
+            :from => "has.land@hotmail.co.uk",
+            :subject => "Testing",
+            :body => "Test message body thing"
 end
